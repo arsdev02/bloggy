@@ -3,7 +3,7 @@ import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import {useAppDispatch} from "../../../../hook";
 import {createComment} from "../../../../redux/slicers/detailsSlice";
 
-type FormValues = {
+export type FormValuesForComment = {
     postId: number,
     body: string,
 }
@@ -16,7 +16,7 @@ interface CreatePostFormProps {
 const CreateCommentForm = ({onCreate, id}: CreatePostFormProps) => {
     const dispatch = useAppDispatch()
 
-    const [formValues, setFormValues] = useState<FormValues>({
+    const [formValues, setFormValues] = useState<FormValuesForComment>({
         postId: id,
         body: '',
     })

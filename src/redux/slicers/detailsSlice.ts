@@ -2,13 +2,14 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 import {fetchPosts} from "./postSlice";
 import {FormValues, IPostDetails} from "../../models";
+import {FormValuesForComment} from "../../components/UI/DetailsComponents/CreateCommentForm/CreateCommentForm";
 
 type PostDetails = {
     post: IPostDetails,
     loading: boolean,
 }
 
-export const fetchPostDetails = createAsyncThunk<IPostDetails, string | undefined, { rejectValue: string }>(
+export const fetchPostDetails = createAsyncThunk<IPostDetails, string | undefined | number, { rejectValue: string }>(
     'post/fetchPostDetails',
     async (id, {rejectWithValue}) => {
         const res = await fetch(`https://bloggy-api.herokuapp.com/posts/${id}?_embed=comments`, {
@@ -36,7 +37,7 @@ export const editPost = createAsyncThunk<void, FormValues, { rejectValue: string
     }
 )
 
-export const createComment = createAsyncThunk<void, any, { rejectValue: string }>(
+export const createComment = createAsyncThunk<void, FormValuesForComment, { rejectValue: string }>(
     'post/createComment',
     async (comment, {dispatch, rejectWithValue}) => {
         await fetch('https://bloggy-api.herokuapp.com/comments', {
