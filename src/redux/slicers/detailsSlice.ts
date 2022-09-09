@@ -1,15 +1,13 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
-import {IComment, IPostDetails} from "../../models";
-import {FormValues} from "../../components/UI/CreatePostForm/CreatePostForm";
 import {fetchPosts} from "./postSlice";
 
 type PostDetails = {
-    postDetails: IPostDetails[],
+    post: any,
     loading: boolean,
 }
 
-export const fetchPostDetails = createAsyncThunk<IPostDetails[], string | undefined, { rejectValue: string }>(
+export const fetchPostDetails = createAsyncThunk<any, any, { rejectValue: string }>(
     'post/fetchPostDetails',
     async (id, {rejectWithValue}) => {
         const res = await fetch(`https://bloggy-api.herokuapp.com/posts/${id}?_embed=comments`, {
@@ -18,42 +16,43 @@ export const fetchPostDetails = createAsyncThunk<IPostDetails[], string | undefi
             }
 
         })
-
         return await res.json()
     }
 )
 
-export const editPost = createAsyncThunk<IPostDetails[], FormValues, { rejectValue: string }>(
+export const editPost = createAsyncThunk<any, any, { rejectValue: string }>(
     'post/editPost',
     async (post, {dispatch,rejectWithValue}) => {
-        const res = await fetch(`https://bloggy-api.herokuapp.com/posts/${post.id}`, {
+        await fetch(`https://bloggy-api.herokuapp.com/posts/${post.id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(post)
         })
+        await dispatch(fetchPostDetails(post.id))
         await dispatch(fetchPosts())
-        return await res.json()
     }
 )
 
-export const createComment = createAsyncThunk<void, IComment[], { rejectValue: string }>(
+export const createComment = createAsyncThunk<any, any, { rejectValue: string }>(
     'post/createComment',
-    async (comment, {rejectWithValue}) => {
-        const res = await fetch('https://bloggy-api.herokuapp.com/comments', {
+    async (comment, {dispatch, rejectWithValue}) => {
+        await fetch('https://bloggy-api.herokuapp.com/comments', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(comment)
         })
+        await dispatch(fetchPostDetails(comment.postId))
+        await dispatch(fetchPosts())
         }
 )
 
 
 const initialState: PostDetails = {
-    postDetails: [],
+    post: [],
     loading: false,
 }
 
@@ -67,7 +66,7 @@ const detailsSlice = createSlice({
                 state.loading = true;
             })
             .addCase(fetchPostDetails.fulfilled, (state, action) => {
-                state.postDetails = action.payload;
+                state.post = action.payload;
                 state.loading = false;
             })
 

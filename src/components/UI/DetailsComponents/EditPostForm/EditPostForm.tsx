@@ -1,24 +1,29 @@
 import React, {useState} from 'react';
-import {useAppDispatch} from "../../../hook";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import {FormValues} from "../CreatePostForm/CreatePostForm";
-import {IPostDetails} from "../../../models";
-import {editPost} from "../../../redux/slicers/detailsSlice";
+import {useAppDispatch, useAppSelector} from "../../../../hook";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
+import {editPost} from "../../../../redux/slicers/detailsSlice";
+
+type FormValues = {
+    id: string | undefined,
+    title: string,
+    body: string,
+}
 
 interface EditPostFormProps {
     onEdit: () => void,
-    post: IPostDetails[]
+    id: string | undefined,
 }
 
-const EditPostForm = ({onEdit, post}: any) => {
+const EditPostForm = ({onEdit, id}:EditPostFormProps) => {
     const dispatch = useAppDispatch()
 
-    const [formValues, setFormValues] = useState<FormValues>({
-        title: post.title,
-        body: post.body,
-        id: post.id,
-    })
+    const { title, body } = useAppSelector(state => state.postDetails.post)
 
+    const [formValues, setFormValues] = useState<FormValues>({
+        id: id,
+        title: title,
+        body: body,
+    })
 
     const [error, setError] = useState('')
 
@@ -27,11 +32,20 @@ const EditPostForm = ({onEdit, post}: any) => {
         setError('')
         if (formValues.title.trim().length === 0) {
             setError('please enter valid title')
+            setFormValues({
+                id: id,
+                title: '',
+                body: '',
+            })
             return
         }
-        console.log(formValues)
 
         dispatch(editPost(formValues))
+        setFormValues({
+            id: id,
+            title: '',
+            body: '',
+        })
 
         onEdit()
     }
@@ -50,11 +64,13 @@ const EditPostForm = ({onEdit, post}: any) => {
         >
             <input
                 type="text"
+                placeholder={'title'}
                 value={formValues.title}
                 onChange={(event) => changeHandler(event, 'title')}
             />
             <input
                 type="text"
+                placeholder={'description'}
                 value={formValues.body}
                 onChange={(event) => changeHandler(event, 'body')}
             />

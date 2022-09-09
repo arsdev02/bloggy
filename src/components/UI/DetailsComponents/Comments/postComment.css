@@ -1,0 +1,12 @@
+.post-details__list {
+    border: 2px solid #faf400;
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.post-details__list-item {
+    border: 1px solid #faf400;
+    padding: 5px;
+}

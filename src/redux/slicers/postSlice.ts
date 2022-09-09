@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 import {IPost} from "../../models";
-import {FormValues} from "../../components/UI/CreatePostForm/CreatePostForm";
+import {FormValues} from "../../components/UI/MainComponents/CreatePostForm/CreatePostForm";
 
 
 type PostsState = {

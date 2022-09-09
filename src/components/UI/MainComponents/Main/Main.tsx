@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {useAppDispatch} from "../../../hook";
-import {fetchPosts} from "../../../redux/slicers/postSlice";
+import {useAppDispatch} from "../../../../hook";
+import {fetchPosts} from "../../../../redux/slicers/postSlice";
 import PostList from "../Posts/PostList";
-import CreateButton from "../CreateButton/CreateButton";
-import Modal from "../Modal/Modal";
+import CreateButton from "../../CreateButton/CreateButton";
+import Modal from "../../Modal/Modal";
 import CreatePostForm from "../CreatePostForm/CreatePostForm";
 
 const Main = () => {

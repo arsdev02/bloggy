@@ -1,54 +1,51 @@
 import React, {useState} from 'react';
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import {useAppDispatch} from "../../../hook";
-import {createComment} from "../../../redux/slicers/detailsSlice";
-import {IComment} from "../../../models";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
+import {useAppDispatch} from "../../../../hook";
+import {createComment} from "../../../../redux/slicers/detailsSlice";
 
-type CommentValues = {
-    id: number,
-    body: string
+type FormValues = {
+    postId: number,
+    body: string,
 }
 
 interface CreatePostFormProps {
-    onCreate: () => void,
+    onCreate: () => void
     id: number,
 }
 
-const CreateCommentForm = ({onCreate, id}:CreatePostFormProps) => {
+const CreateCommentForm = ({onCreate, id}: CreatePostFormProps) => {
     const dispatch = useAppDispatch()
 
-    const [commentValues, setCommentValues] = useState<IComment>({
+    const [formValues, setFormValues] = useState<FormValues>({
         postId: id,
         body: '',
     })
 
     const [error, setError] = useState('')
-
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault()
         setError('')
-        if (commentValues.body.trim().length === 0) {
+        if (formValues.body.trim().length === 0) {
             setError('please enter valid title')
-            setCommentValues({
-                ...commentValues,
-                body:'',
+            setFormValues({
+                postId: id,
+                body: '',
             })
             return
         }
 
-
-        dispatch(createComment(commentValues))
-        setCommentValues({
-            ...commentValues,
-            body:'',
+        dispatch(createComment(formValues))
+        setFormValues({
+            postId: id,
+            body: '',
         })
 
         onCreate()
     }
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>, prop: string) => {
-        setCommentValues({
-            ...commentValues,
+        setFormValues({
+            ...formValues,
             [prop]: e.target.value
         })
     }
@@ -60,8 +57,8 @@ const CreateCommentForm = ({onCreate, id}:CreatePostFormProps) => {
         >
             <input
                 type="text"
-                placeholder={'title'}
-                value={commentValues.body}
+                placeholder={'comment'}
+                value={formValues.body}
                 onChange={(event) => changeHandler(event, 'body')}
             />
 

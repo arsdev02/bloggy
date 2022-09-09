@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAppSelector} from "../../../hook";
+import {useAppSelector} from "../../../../hook";
 import PostItem from "./PostItem";
 
 import './posts.css'

@@ -1,5 +1,5 @@
 import React from 'react';
-import Details from "../UI/Details/Details";
+import Details from "../UI/DetailsComponents/Details/Details";
 
 const DetailsPage = () => {
     return (

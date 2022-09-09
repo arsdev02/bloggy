@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-import {IPost} from "../../../models";
-import {deletePost} from "../../../redux/slicers/postSlice";
-import {useAppDispatch} from "../../../hook";
+import {IPost} from "../../../../models";
+import {deletePost} from "../../../../redux/slicers/postSlice";
+import {useAppDispatch} from "../../../../hook";
 
 const PostItem: React.FC<IPost> = ({id, title, body}) => {
     const dispatch = useAppDispatch()
@@ -22,7 +22,11 @@ const PostItem: React.FC<IPost> = ({id, title, body}) => {
                 <Link
                     to={`post/${id}`}
                 >
-                    <button className={'post-item__button'}>read more</button>
+                    <button
+                        className={'post-item__button'}
+                    >
+                        read more
+                    </button>
                 </Link>
             </div>
         </li>
