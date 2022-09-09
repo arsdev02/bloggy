@@ -2,27 +2,24 @@ import React, {useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../../../hook";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import {editPost} from "../../../../redux/slicers/detailsSlice";
+import {useParams} from "react-router-dom";
 
 type FormValues = {
-    id: string | undefined,
     title: string,
     body: string,
 }
 
 interface EditPostFormProps {
     onEdit: () => void,
-    id: string | undefined,
 }
 
-const EditPostForm = ({onEdit, id}:EditPostFormProps) => {
+const EditPostForm = ({onEdit}: EditPostFormProps) => {
     const dispatch = useAppDispatch()
-
-    const { title, body } = useAppSelector(state => state.postDetails.post)
-
+    const {post} = useAppSelector(state => state.postDetails)
+    const { id } = useParams()
     const [formValues, setFormValues] = useState<FormValues>({
-        id: id,
-        title: title,
-        body: body,
+        title: post.title,
+        body: post.body,
     })
 
     const [error, setError] = useState('')
@@ -33,16 +30,14 @@ const EditPostForm = ({onEdit, id}:EditPostFormProps) => {
         if (formValues.title.trim().length === 0) {
             setError('please enter valid title')
             setFormValues({
-                id: id,
                 title: '',
                 body: '',
             })
             return
         }
 
-        dispatch(editPost(formValues))
+        dispatch(editPost([{id}, formValues]))
         setFormValues({
-            id: id,
             title: '',
             body: '',
         })

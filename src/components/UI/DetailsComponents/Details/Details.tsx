@@ -10,15 +10,20 @@ import {useParams} from "react-router-dom";
 import './details.css'
 import CreateCommentForm from "../CreateCommentForm/CreateCommentForm";
 import CreateButton from "../../CreateButton/CreateButton";
+import {IComments, IPostDetails} from "../../../../models";
+
+
 const Details = () => {
     const dispatch = useAppDispatch()
 
     const { id } = useParams()
 
-    const {comments} = useAppSelector(state => state.postDetails.post)
     const {post} = useAppSelector(state => state.postDetails)
+    const {comments} = useAppSelector(state => state.postDetails.post)
     const [modal, setModal] = useState(false)
     const [formModal, setFormModal] = useState(false)
+
+    console.log(post.id)
 
     useEffect(() => {
         dispatch(fetchPostDetails(id))
@@ -26,10 +31,11 @@ const Details = () => {
 
     return (
         <div className={'container post-details'}>
-            <PostDetails onEdit={()=>setModal(true)}/>
+            <PostDetails onEdit={() => setModal(true)} post={post}/>
+
             {comments && comments.length>0 && <PostCommentList comments={comments}/>}
             {modal && <Modal title={'edit post'} onClose={()=>setModal(false)}>
-                    <EditPostForm onEdit={()=>setModal(false)} id={id}/>
+                    <EditPostForm onEdit={()=>setModal(false)}/>
                 </Modal>}
 
             {formModal && <Modal title={'create comment'} onClose={() => setFormModal(false)}>

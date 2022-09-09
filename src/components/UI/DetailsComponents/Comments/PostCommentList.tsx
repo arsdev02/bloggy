@@ -2,16 +2,9 @@ import React from 'react';
 import PostCommentItem from "./PostCommentItem";
 
 import './postComment.css'
+import {IComments} from "../../../../models";
 
-interface PostCommentListProps {
-    comments: [{
-        postId: number,
-        id: number,
-        body: string,
-    }]
-}
-
-const PostCommentList = ({comments}: PostCommentListProps) => {
+const PostCommentList = ({comments}: IComments) => {
 
     return (
         <ul className={'post-details__list'}>

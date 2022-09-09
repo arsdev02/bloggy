@@ -1,13 +1,14 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 import {fetchPosts} from "./postSlice";
+import {FormValues, IPostDetails} from "../../models";
 
 type PostDetails = {
-    post: any,
+    post: IPostDetails,
     loading: boolean,
 }
 
-export const fetchPostDetails = createAsyncThunk<any, any, { rejectValue: string }>(
+export const fetchPostDetails = createAsyncThunk<IPostDetails, string | undefined, { rejectValue: string }>(
     'post/fetchPostDetails',
     async (id, {rejectWithValue}) => {
         const res = await fetch(`https://bloggy-api.herokuapp.com/posts/${id}?_embed=comments`, {
@@ -20,22 +21,22 @@ export const fetchPostDetails = createAsyncThunk<any, any, { rejectValue: string
     }
 )
 
-export const editPost = createAsyncThunk<any, any, { rejectValue: string }>(
+export const editPost = createAsyncThunk<void, FormValues, { rejectValue: string }>(
     'post/editPost',
-    async (post, {dispatch,rejectWithValue}) => {
-        await fetch(`https://bloggy-api.herokuapp.com/posts/${post.id}`, {
+    async ([{id}, post], {dispatch,rejectWithValue}) => {
+        await fetch(`https://bloggy-api.herokuapp.com/posts/${id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(post)
         })
-        await dispatch(fetchPostDetails(post.id))
+        await dispatch(fetchPostDetails(id))
         await dispatch(fetchPosts())
     }
 )
 
-export const createComment = createAsyncThunk<any, any, { rejectValue: string }>(
+export const createComment = createAsyncThunk<void, any, { rejectValue: string }>(
     'post/createComment',
     async (comment, {dispatch, rejectWithValue}) => {
         await fetch('https://bloggy-api.herokuapp.com/comments', {
@@ -50,9 +51,17 @@ export const createComment = createAsyncThunk<any, any, { rejectValue: string }>
         }
 )
 
-
-const initialState: PostDetails = {
-    post: [],
+const initialState:PostDetails = {
+    post: {
+        id: 0,
+        title: '',
+        body: '',
+        comments: [{
+            postId: 0,
+            id: 0,
+            body: '',
+        }]
+    },
     loading: false,
 }
 
@@ -69,7 +78,6 @@ const detailsSlice = createSlice({
                 state.post = action.payload;
                 state.loading = false;
             })
-
     }
 });
 

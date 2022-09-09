@@ -4,16 +4,17 @@ import {deletePost} from "../../../../redux/slicers/postSlice";
 
 import './postDetails.css'
 import {useNavigate} from "react-router-dom";
+import {IPostDetails} from "../../../../models";
 
 interface PostDetailsProps {
     onEdit: () => void,
+    post: IPostDetails,
 }
 
-const PostDetails = ({onEdit}: PostDetailsProps) => {
+const PostDetails = ({onEdit, post}: PostDetailsProps) => {
     const dispatch = useAppDispatch()
     const navigation = useNavigate()
-    const {post} = useAppSelector(state => state.postDetails)
-
+    console.log(post)
     const handleDeletePost = async () => {
         await dispatch(deletePost(post.id))
         await navigation('/')
