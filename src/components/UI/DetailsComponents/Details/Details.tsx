@@ -19,7 +19,7 @@ const Details = () => {
 
   const { id } = useParams();
 
-  const {post} = useAppSelector(state => state.postDetails);
+  const {post, loading} = useAppSelector(state => state.postDetails);
   const [modal, setModal] = useState(false);
   const [commentModal, setCommentModal] = useState(false);
 
@@ -29,9 +29,9 @@ const Details = () => {
 
   return (
     <div className={'container post-details'}>
-      <PostDetails onEdit={() => setModal(true)} post={post}/>
+      {!loading?<PostDetails onEdit={() => setModal(true)} post={post}/>:<h1>loading...</h1>}
 
-      {post.comments && post.comments.length>0 && <PostCommentList comments={post.comments}/>}
+      {!loading && post.comments && post.comments.length>0 && <PostCommentList comments={post.comments}/>}
       {modal && <Modal title={'edit post'} onClose={()=>setModal(false)}>
         <EditPostForm onEdit={()=>setModal(false)}/>
       </Modal>}

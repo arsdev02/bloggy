@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
-import {FormValues, IPostDetails} from '../../models';
+import {defaultDetailsState, FormValues, IPostDetails} from '../../models';
 import {FormValuesForComment} from '../../components/UI/DetailsComponents/CreateCommentForm/CreateCommentForm';
 
 import {fetchPosts} from './postSlice';
@@ -54,16 +54,7 @@ export const createComment = createAsyncThunk<void, FormValuesForComment, { reje
 );
 
 const initialState:PostDetailsState = {
-  post: {
-    id: 0,
-    title: '',
-    body: '',
-    comments: [{
-      postId: 0,
-      id: 0,
-      body: '',
-    }],
-  },
+  post: defaultDetailsState,
   loading: false,
 };
 

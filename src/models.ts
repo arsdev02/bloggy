@@ -30,4 +30,14 @@ export type FormValues = [
         body: string,
     }
 ]
+export const defaultDetailsState:IPostDetails = {
+  id: 0,
+  title: '',
+  body: '',
+  comments: [{
+    postId: 0,
+    id: 0,
+    body: '',
+  }],
+};
 
