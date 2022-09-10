@@ -1,8 +1,8 @@
 import React from 'react';
 import PostCommentItem from "./PostCommentItem";
+import {IComments} from "../../../../models";
 
 import './postComment.css'
-import {IComments} from "../../../../models";
 
 const PostCommentList = ({comments}: IComments) => {
 

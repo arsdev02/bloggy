@@ -6,11 +6,10 @@ import EditPostForm from "../EditPostForm/EditPostForm";
 import {useAppDispatch, useAppSelector} from "../../../../hook";
 import {fetchPostDetails} from "../../../../redux/slicers/detailsSlice";
 import {useParams} from "react-router-dom";
-
-import './details.css'
 import CreateCommentForm from "../CreateCommentForm/CreateCommentForm";
 import CreateButton from "../../CreateButton/CreateButton";
-import {IComments, IPostDetails} from "../../../../models";
+
+import './details.css'
 
 
 const Details = () => {
@@ -19,11 +18,8 @@ const Details = () => {
     const { id } = useParams()
 
     const {post} = useAppSelector(state => state.postDetails)
-    const {comments} = useAppSelector(state => state.postDetails.post)
     const [modal, setModal] = useState(false)
-    const [formModal, setFormModal] = useState(false)
-
-    console.log(post.id)
+    const [commentModal, setCommentModal] = useState(false)
 
     useEffect(() => {
         dispatch(fetchPostDetails(id))
@@ -33,15 +29,15 @@ const Details = () => {
         <div className={'container post-details'}>
             <PostDetails onEdit={() => setModal(true)} post={post}/>
 
-            {comments && comments.length>0 && <PostCommentList comments={comments}/>}
+            {post.comments && post.comments.length>0 && <PostCommentList comments={post.comments}/>}
             {modal && <Modal title={'edit post'} onClose={()=>setModal(false)}>
                     <EditPostForm onEdit={()=>setModal(false)}/>
                 </Modal>}
 
-            {formModal && <Modal title={'create comment'} onClose={() => setFormModal(false)}>
-                <CreateCommentForm onCreate={() => setFormModal(false)} id={post.id}/>
+            {commentModal && <Modal title={'create comment'} onClose={() => setCommentModal(false)}>
+                <CreateCommentForm onCreate={() => setCommentModal(false)} id={post.id}/>
             </Modal>}
-            <CreateButton onCreate={() => setFormModal(true)}/>
+            <CreateButton onCreate={() => setCommentModal(true)}/>
         </div>
     );
 };

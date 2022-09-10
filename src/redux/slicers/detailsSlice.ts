@@ -4,7 +4,7 @@ import {fetchPosts} from "./postSlice";
 import {FormValues, IPostDetails} from "../../models";
 import {FormValuesForComment} from "../../components/UI/DetailsComponents/CreateCommentForm/CreateCommentForm";
 
-type PostDetails = {
+type PostDetailsState = {
     post: IPostDetails,
     loading: boolean,
 }
@@ -52,7 +52,7 @@ export const createComment = createAsyncThunk<void, FormValuesForComment, { reje
         }
 )
 
-const initialState:PostDetails = {
+const initialState:PostDetailsState = {
     post: {
         id: 0,
         title: '',
