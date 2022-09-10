@@ -7,11 +7,11 @@ interface PostCommentItemProps {
 }
 
 const PostCommentItem = ({body}: PostCommentItemProps) => {
-    return (
-        <li className={'post-details__list-item'}>
-            <p>{body}</p>
-        </li>
-    );
+  return (
+    <li className={'post-details__list-item'}>
+      <p>{body}</p>
+    </li>
+  );
 };
 
 export default PostCommentItem;

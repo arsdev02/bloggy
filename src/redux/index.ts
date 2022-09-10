@@ -1,13 +1,14 @@
-import {configureStore} from "@reduxjs/toolkit";
-import postSlice from "./slicers/postSlice";
-import detailsSlice from "./slicers/detailsSlice";
+import {configureStore} from '@reduxjs/toolkit';
+
+import postSlice from './slicers/postSlice';
+import detailsSlice from './slicers/detailsSlice';
 
 
 const store = configureStore({
-    reducer: {
-        posts: postSlice,
-        postDetails: detailsSlice,
-    },
+  reducer: {
+    posts: postSlice,
+    postDetails: detailsSlice,
+  },
 });
 
 export default store;

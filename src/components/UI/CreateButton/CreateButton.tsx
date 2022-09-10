@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './CreateButton.css'
+import './CreateButton.css';
 
 interface CreatePostFormProps {
     onCreate: () => void
@@ -8,9 +8,9 @@ interface CreatePostFormProps {
 
 const CreateButton = ({onCreate}: CreatePostFormProps) => {
 
-    return (
-        <button className={'create-button'} onClick={onCreate}>+</button>
-    );
+  return (
+    <button className={'create-button'} onClick={onCreate}>+</button>
+  );
 };
 
 export default CreateButton;

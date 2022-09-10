@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import './createPostForm.css'
-import {createPost} from "../../../../redux/slicers/postSlice";
-import {useAppDispatch} from "../../../../hook";
-import ErrorMessage from "../../ErrorMessage/ErrorMessage";
+
+import './createPostForm.css';
+import {createPost} from '../../../../redux/slicers/postSlice';
+import {useAppDispatch} from '../../../../hook';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
 export type FormValues = {
     title: string,
@@ -14,66 +15,66 @@ interface CreatePostFormProps {
 }
 
 const CreatePostForm = ({onCreate}: CreatePostFormProps) => {
-    const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-    const [formValues, setFormValues] = useState<FormValues>({
+  const [formValues, setFormValues] = useState<FormValues>({
+    title: '',
+    body: '',
+  });
+
+  const [error, setError] = useState('');
+
+  const submitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+    setError('');
+    if (formValues.title.trim().length === 0) {
+      setError('please enter valid title');
+      setFormValues({
         title: '',
         body: '',
-    })
-
-    const [error, setError] = useState('')
-
-    const submitHandler = (event: React.FormEvent) => {
-        event.preventDefault()
-        setError('')
-        if (formValues.title.trim().length === 0) {
-            setError('please enter valid title')
-            setFormValues({
-                title: '',
-                body: '',
-            })
-            return
-        }
-
-        dispatch(createPost(formValues))
-        setFormValues({
-            title: '',
-            body: '',
-        })
-
-        onCreate()
+      });
+      return;
     }
 
-    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>, prop: string) => {
-        setFormValues({
-            ...formValues,
-            [prop]: e.target.value
-        })
-    }
+    dispatch(createPost(formValues));
+    setFormValues({
+      title: '',
+      body: '',
+    });
 
-    return (
-        <form
-            className={'form'}
-            onSubmit={submitHandler}
-        >
-            <input
-                type="text"
-                placeholder={'title'}
-                value={formValues.title}
-                onChange={(event) => changeHandler(event, 'title')}
-            />
-            <input
-                type="text"
-                placeholder={'description'}
-                value={formValues.body}
-                onChange={(event) => changeHandler(event, 'body')}
-            />
+    onCreate();
+  };
 
-            {error && <ErrorMessage error={error}/>}
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>, prop: string) => {
+    setFormValues({
+      ...formValues,
+      [prop]: e.target.value,
+    });
+  };
 
-            <button type={"submit"}>create</button>
-        </form>
-    );
+  return (
+    <form
+      className={'form'}
+      onSubmit={submitHandler}
+    >
+      <input
+        type="text"
+        placeholder={'title'}
+        value={formValues.title}
+        onChange={(event) => changeHandler(event, 'title')}
+      />
+      <input
+        type="text"
+        placeholder={'description'}
+        value={formValues.body}
+        onChange={(event) => changeHandler(event, 'body')}
+      />
+
+      {error && <ErrorMessage error={error}/>}
+
+      <button type={'submit'}>create</button>
+    </form>
+  );
 };
 
 export default CreatePostForm;
