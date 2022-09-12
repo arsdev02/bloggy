@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="519d3ae6-c9a4-4ff7-b6e6-0d53ee369015" name="Changes" comment="update commit">
+      <change beforePath="$PROJECT_DIR$/src/components/UI/MainComponents/CreatePostForm/CreatePostForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/MainComponents/CreatePostForm/CreatePostForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/slicers/detailsSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/slicers/detailsSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/slicers/postSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/slicers/postSlice.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2EZMU2ugwfAbWQEmbgP0qK7P0y6" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\User\\Desktop\\Новая папка\\bloggy\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="519d3ae6-c9a4-4ff7-b6e6-0d53ee369015" name="Changes" comment="" />
+      <created>1662798664166</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1662798664166</updated>
+      <workItem from="1662798666283" duration="448000" />
+      <workItem from="1662826821563" duration="1983000" />
+      <workItem from="1662836143067" duration="645000" />
+      <workItem from="1662837112551" duration="2330000" />
+      <workItem from="1662969482023" duration="8347000" />
+    </task>
+    <task id="LOCAL-00001" summary="update commit">
+      <created>1662827379606</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1662827379606</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="update commit" />
+  </component>
+</project>
