@@ -23,6 +23,12 @@ export type IComments = {
     }]
 }
 
+export type IPostComment = {
+  postId: number,
+  id: number,
+  body: string,
+}
+
 export type FormValues = [
     { id: string | undefined },
     {

@@ -1,9 +1,11 @@
+
 import React, {useState} from 'react';
 
-import './createPostForm.css';
 import {createPost} from '../../../../redux/slicers/postSlice';
 import {useAppDispatch} from '../../../../hook';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
+
+import './createPostForm.css';
 
 export type FormValues = {
     title: string,

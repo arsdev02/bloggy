@@ -1,9 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
-import {defaultDetailsState, FormValues, IPostDetails} from '../../models';
+import {defaultDetailsState, FormValues, IPost, IPostComment, IPostDetails} from '../../models';
 import {FormValuesForComment} from '../../components/UI/DetailsComponents/CreateCommentForm/CreateCommentForm';
-
-import {fetchPosts} from './postSlice';
 
 type PostDetailsState = {
     post: IPostDetails,
@@ -23,33 +21,31 @@ export const fetchPostDetails = createAsyncThunk<IPostDetails, string | undefine
   },
 );
 
-export const editPost = createAsyncThunk<void, FormValues, { rejectValue: string }>(
+export const editPost = createAsyncThunk<IPost, FormValues, { rejectValue: string }>(
   'post/editPost',
   async ([{id}, post], {dispatch,rejectWithValue}) => {
-    await fetch(`https://bloggy-api.herokuapp.com/posts/${id}`, {
+    const res = await fetch(`https://bloggy-api.herokuapp.com/posts/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(post),
     });
-    await dispatch(fetchPostDetails(id));
-    await dispatch(fetchPosts());
+    return res.json();
   },
 );
 
-export const createComment = createAsyncThunk<void, FormValuesForComment, { rejectValue: string }>(
+export const createComment = createAsyncThunk<IPostComment, FormValuesForComment, { rejectValue: string }>(
   'post/createComment',
-  async (comment, {dispatch, rejectWithValue}) => {
-    await fetch('https://bloggy-api.herokuapp.com/comments', {
+  async (comment, {rejectWithValue}) => {
+    const res = await fetch('https://bloggy-api.herokuapp.com/comments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(comment),
     });
-    await dispatch(fetchPostDetails(comment.postId));
-    await dispatch(fetchPosts());
+    return await res.json();
   },
 );
 
@@ -70,6 +66,13 @@ const detailsSlice = createSlice({
       .addCase(fetchPostDetails.fulfilled, (state, action) => {
         state.post = action.payload;
         state.loading = false;
+      })
+      .addCase(createComment.fulfilled, (state, action) => {
+        state.post.comments.push(action.payload);
+      })
+      .addCase(editPost.fulfilled, (state, action) => {
+        state.post.title = action.payload.title;
+        state.post.body = action.payload.body;
       });
   },
 });
